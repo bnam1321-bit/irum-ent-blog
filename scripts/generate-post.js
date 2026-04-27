@@ -85,23 +85,24 @@ async function generatePost() {
     // 2. 글 작성
     let content = "";
 
-    const MAX_RETRIES = 3;
+    const MODELS = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-lite"];
     let lastError = null;
 
-    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-        try {
-            console.log(`🚀 Gemini 2.5 Flash 모델로 글 작성 시도 (${attempt}/${MAX_RETRIES})...`);
-            const model = genAI.getGenerativeModel({
-                model: "gemini-2.5-flash",
-                generationConfig: {
-                    temperature: 0.7,
-                    topP: 0.8,
-                    topK: 40,
-                    maxOutputTokens: 8192,
-                }
-            });
+    for (const modelName of MODELS) {
+        for (let attempt = 1; attempt <= 2; attempt++) {
+            try {
+                console.log(`🚀 ${modelName} 모델로 글 작성 시도 (${attempt}/2)...`);
+                const model = genAI.getGenerativeModel({
+                    model: modelName,
+                    generationConfig: {
+                        temperature: 0.7,
+                        topP: 0.8,
+                        topK: 40,
+                        maxOutputTokens: 8192,
+                    }
+                });
 
-            const fullPrompt = `${SYSTEM_PROMPT}
+                const fullPrompt = `${SYSTEM_PROMPT}
 
 ## 병원 기본 정보 (글 작성 시 참고용 - 포스팅에 직접 기재하지 말 것)
 - 병원명: 이룸이비인후과의원
@@ -171,22 +172,25 @@ A: (실천 가능한 조언)
 - 부작용과 주의사항을 반드시 포함
 `;
 
-            const result = await model.generateContent(fullPrompt);
-            const response = await result.response;
-            content = response.text();
-            console.log("✨ Gemini 2.5 Flash 작성 성공!");
-            console.log(`📄 생성된 글 길이: ${content.length}자`);
-            break;
+                const result = await model.generateContent(fullPrompt);
+                const response = await result.response;
+                content = response.text();
+                console.log(`✨ ${modelName} 작성 성공!`);
+                console.log(`📄 생성된 글 길이: ${content.length}자`);
+                break;
 
-        } catch (apiError) {
-            lastError = apiError;
-            console.error(`❌ Gemini API 오류 (시도 ${attempt}/${MAX_RETRIES}):`, apiError.message);
+            } catch (apiError) {
+                lastError = apiError;
+                console.error(`❌ ${modelName} 오류 (시도 ${attempt}/2):`, apiError.message);
 
-            if (attempt < MAX_RETRIES) {
-                console.log(`⏳ ${attempt * 2}초 후 재시도...`);
-                await new Promise(resolve => setTimeout(resolve, attempt * 2000));
+                if (attempt < 2) {
+                    console.log(`⏳ ${attempt * 3}초 후 재시도...`);
+                    await new Promise(resolve => setTimeout(resolve, attempt * 3000));
+                }
             }
         }
+        if (content) break;
+        console.log(`⚠️ ${modelName} 모델 실패, 다음 모델로 전환...`);
     }
 
     // 모든 재시도 실패 시 Fallback
@@ -227,22 +231,30 @@ ${topicContent.content}
 
     // 4. 파일 저장
     let slug = "";
-    try {
-        const slugModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-        const slugPrompt = `
+    const slugPrompt = `
         블로그 글 제목: "${topic}"
         
         위 제목을 바탕으로 검색 엔진 최적화(SEO)에 유리한 영문 URL Slug를 만들어주세요.
         - 규칙: 소문자, 하이픈(-) 연결, 특수문자 제거
         - 예시: "환절기 비염 관리" -> "seasonal-rhinitis-management"
         - 출력: 슬러그만 출력 (다른 텍스트 없이)
-        `;
-        const slugResult = await slugModel.generateContent(slugPrompt);
-        slug = slugResult.response.text().trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
-        console.log(`🔗 생성된 Slug: ${slug}`);
-    } catch (e) {
-        console.error("Slug 생성 실패, 타임스탬프로 대체", e);
+    `;
+    for (const m of MODELS) {
+        try {
+            const slugModel = genAI.getGenerativeModel({ model: m });
+            const slugResult = await slugModel.generateContent(slugPrompt);
+            slug = slugResult.response.text().trim().toLowerCase().replace(/[^a-z0-9-]/g, '');
+            if (slug) {
+                console.log(`🔗 생성된 Slug (${m}): ${slug}`);
+                break;
+            }
+        } catch (e) {
+            console.error(`Slug 생성 실패 (${m}), 다음 모델 시도...`);
+        }
+    }
+    if (!slug) {
         slug = Math.random().toString(36).substring(7);
+        console.log(`🔗 Slug 랜덤 생성: ${slug}`);
     }
 
     const filename = `${today}-${slug}.md`;
