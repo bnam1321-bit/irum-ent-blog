@@ -1,4 +1,4 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const path = require('path');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { format } = require('date-fns');
@@ -43,7 +43,7 @@ async function generatePost() {
         console.log(`🎯 지정된 주제: [${topic}]`);
     } else {
         try {
-            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+            const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
             const topicPrompt = `
             당신은 이비인후과 병원 블로그 마케터입니다.
             기존에 작성된 블로그 글 제목들은 다음과 같습니다:
@@ -85,7 +85,7 @@ async function generatePost() {
     // 2. 글 작성
     let content = "";
 
-    const MODELS = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-lite"];
+    const MODELS = ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.0-flash"];
     let lastError = null;
 
     for (const modelName of MODELS) {
