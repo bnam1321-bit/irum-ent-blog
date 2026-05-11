@@ -81,21 +81,34 @@ export default function ServicesPage() {
                 <div className="bg-white rounded-3xl p-12 shadow-xl border border-slate-100">
                     <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center tracking-tight">진료 시간</h2>
                     <div className="max-w-2xl mx-auto space-y-4">
-                        <div className="flex justify-between py-3 border-b border-slate-100">
-                            <span className="font-semibold text-slate-700">평일 (월~금)</span>
-                            <span className="text-slate-600">09:00 ~ 18:30</span>
+                        <div className="flex justify-between py-3 border-b border-slate-100 items-start">
+                            <span className="font-semibold text-slate-700 mt-1">월·목요일</span>
+                            <div className="text-right">
+                                <span className="block text-slate-600 font-medium">09:00 ~ 19:40</span>
+                                <span className="block text-sm text-slate-500 mt-0.5">접수마감 19:30</span>
+                            </div>
+                        </div>
+                        <div className="flex justify-between py-3 border-b border-slate-100 items-start">
+                            <span className="font-semibold text-slate-700 mt-1">화·수·금요일</span>
+                            <div className="text-right">
+                                <span className="block text-slate-600 font-medium">09:00 ~ 18:40</span>
+                                <span className="block text-sm text-slate-500 mt-0.5">접수마감 18:30</span>
+                            </div>
                         </div>
                         <div className="flex justify-between py-3 border-b border-slate-100">
                             <span className="font-semibold text-slate-700">휴게시간 (월~금)</span>
                             <span className="text-slate-600">13:00 ~ 14:00</span>
                         </div>
-                        <div className="flex justify-between py-3 border-b border-slate-100">
-                            <span className="font-semibold text-teal-700">토요일</span>
-                            <span className="text-slate-600">09:00 ~ 13:00</span>
+                        <div className="flex justify-between py-3 border-b border-slate-100 items-start">
+                            <span className="font-semibold text-teal-700 mt-1">토요일</span>
+                            <div className="text-right">
+                                <span className="block text-slate-600 font-medium">09:00 ~ 14:00</span>
+                                <span className="block text-sm text-slate-500 mt-0.5">점심시간 없음 | 접수마감 13:50</span>
+                            </div>
                         </div>
                         <div className="flex justify-between py-3">
-                            <span className="font-semibold text-red-500">일/공휴일</span>
-                            <span className="text-red-500 font-bold">휴진</span>
+                            <span className="font-semibold text-red-500">일요일</span>
+                            <span className="text-red-500 font-bold">정기휴무</span>
                         </div>
                     </div>
 

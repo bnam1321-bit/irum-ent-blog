@@ -46,23 +46,30 @@ export default function Footer() {
                         </h3>
                         <ul className="space-y-3 text-sm">
                             <li className="flex justify-between items-start border-b border-slate-100 pb-2">
-                                <span className="font-bold text-slate-800 w-20">평일</span>
+                                <span className="font-bold text-slate-800 w-20">월·목</span>
                                 <div className="text-right text-slate-600">
-                                    <span className="block font-medium text-slate-900">09:00 - 18:30</span>
-                                    <span className="text-xs text-slate-500">휴게시간 13:00 - 14:00</span>
+                                    <span className="block font-medium text-slate-900">09:00 - 19:40</span>
+                                    <span className="text-xs text-slate-500">휴게 13:00-14:00 | 접수 19:30 마감</span>
+                                </div>
+                            </li>
+                            <li className="flex justify-between items-start border-b border-slate-100 pb-2">
+                                <span className="font-bold text-slate-800 w-20">화·수·금</span>
+                                <div className="text-right text-slate-600">
+                                    <span className="block font-medium text-slate-900">09:00 - 18:40</span>
+                                    <span className="text-xs text-slate-500">휴게 13:00-14:00 | 접수 18:30 마감</span>
                                 </div>
                             </li>
                             <li className="flex justify-between items-start border-b border-slate-100 pb-2">
                                 <span className="font-bold text-teal-700 w-20">토요일</span>
                                 <div className="text-right text-slate-600">
-                                    <span className="block font-medium text-slate-900">09:00 - 13:00</span>
-                                    <span className="text-xs text-slate-500">휴게시간 없음</span>
+                                    <span className="block font-medium text-slate-900">09:00 - 14:00</span>
+                                    <span className="text-xs text-slate-500">휴게시간 없음 | 접수 13:50 마감</span>
                                 </div>
                             </li>
                             <li className="flex justify-between items-center pt-1">
-                                <span className="font-bold text-red-500 w-20">일/공휴일</span>
+                                <span className="font-bold text-red-500 w-20">일요일</span>
                                 <div className="text-right">
-                                    <span className="inline-block px-2 py-1 bg-red-50 text-red-600 rounded text-xs font-bold">휴진</span>
+                                    <span className="inline-block px-2 py-1 bg-red-50 text-red-600 rounded text-xs font-bold">정기휴무</span>
                                 </div>
                             </li>
                         </ul>
