@@ -118,11 +118,10 @@ export default function ServicesPage() {
               <div className="p-6 rounded-2xl border-2 border-teal-100 bg-teal-50">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-2xl">🏥</span>
-                  <h3 className="font-bold text-lg" style={{ color: '#0D7377' }}>코골이/수면무호흡 검사 — 의료보험 시행</h3>
+                  <h3 className="font-bold text-lg" style={{ color: '#0D7377' }}>코골이/수면무호흡 검사 — 의료보험 적용</h3>
                 </div>
-                <p className="text-sm font-semibold mb-3" style={{ color: '#2BAAAD' }}>"이제 부담없는 금액으로 검사 받으세요!"</p>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  코골이·수면무호흡은 반드시 치료해야 하는 질병입니다. 고혁력 수면다원검사(PSG) 포함 보험 적용으로 지금 원장님과 상담하세요.
+                  2018년 7월부터 코골이·수면무호흡 증상에 대한 수면다원검사(PSG)가 건강보험 적용 항목으로 지정되었습니다. 보험사 기준에 따라 본인부담금이 다를 수 있으니 내원 안내를 통해 확인하시기 바랍니다.
                 </p>
               </div>
               <div className="p-6 rounded-2xl border border-slate-100 bg-[#FAFAF8]">
