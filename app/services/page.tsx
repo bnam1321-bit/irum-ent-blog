@@ -312,6 +312,80 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
+
+        {/* 비염수술 장비 섹션 */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-sky-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+
+            <div className="text-center mb-10 relative z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4" style={{ background: '#EFF6FF', color: '#2563EB' }}>
+                🔪 비염·축농증 수술 클리닉
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: '#4A3728' }}>
+                축농증 및 비염수술 최신 의료장비
+              </h2>
+              <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
+                OSSEOUNO Shaver System은 내시경 부비동 수술 전용 점진 수술기구로,<br className="hidden sm:block" /> 수술 중 통증과 출혈이 적고 수술시간이 단축됩니다.
+              </p>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-8 relative z-10">
+              {/* 장비 이미지 */}
+              <div className="md:w-1/3 flex-shrink-0">
+                <div className="rounded-3xl overflow-hidden border border-slate-100 shadow-md bg-white p-4 h-full flex items-center justify-center">
+                  <Image
+                    src="/images/img_osseouno.jpg"
+                    alt="OSSEOUNO 셔이버 시스템 비염수술 장비"
+                    width={300}
+                    height={400}
+                    className="w-full object-contain max-h-80"
+                  />
+                </div>
+              </div>
+
+              {/* 장비 정보 */}
+              <div className="flex-1 space-y-5">
+                <div className="p-5 rounded-2xl border border-slate-100 bg-[#FAFAF8]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ background: '#2563EB' }}>▶</span>
+                    <h3 className="font-bold text-base" style={{ color: '#2563EB' }}>제품용도</h3>
+                  </div>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    내시경 부비동 수술에 쓰이는 기구로서 작은 트날이 물룹을 잘게 잘라서 흡입하여 제거할 수 있는 수술기구입니다.
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl border border-slate-100 bg-[#FAFAF8]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ background: '#2563EB' }}>▶</span>
+                    <h3 className="font-bold text-base" style={{ color: '#2563EB' }}>적용수술</h3>
+                  </div>
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    축농증수술, 융종절제술, 유동절제술, 비개 절제술, 비중격성형술, 안화감압술, 안신경감압술 등
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl border border-slate-100 bg-[#FAFAF8]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold" style={{ background: '#2563EB' }}>▶</span>
+                    <h3 className="font-bold text-base" style={{ color: '#2563EB' }}>특·장점</h3>
+                  </div>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2 text-sm text-slate-600">
+                      <span className="font-bold" style={{ color: '#D4882B' }}>1.</span>
+                      수술 시 통증과 출혈이 적음
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-slate-600">
+                      <span className="font-bold" style={{ color: '#D4882B' }}>2.</span>
+                      수술이 용이하고 수술시간이 단축됨
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
