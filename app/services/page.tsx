@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export const metadata = {
   title: '진료정보 | 이룸이비인후과',
   description: '이룸이비인후과의 전문 협진 시스템과 최첨단 수면평가 및 양압기 장비 정보를 안내합니다.',
@@ -128,6 +130,22 @@ export default function ServicesPage() {
               <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
                 이석증, 메니에르병, 전정신경염 등 복잡한 어지럼증의 원인을<br className="hidden sm:block" /> 대학병원급 최첨단 장비를 통해 오차 없이 정밀하게 진단하고 치료합니다.
               </p>
+            </div>
+
+            {/* 검사 장비 이미지 갤러리 */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 relative z-10">
+              <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
+                <Image src="/images/sbt-390-1.png" alt="발란싱 캣 동적체평형검사기" fill className="object-contain" />
+              </div>
+              <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
+                <Image src="/images/sbt-390-2.png" alt="동적체평형검사 및 평가 차트" fill className="object-contain" />
+              </div>
+              <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
+                <Image src="/images/sbt-390-3.png" alt="자동평형검사 훈련 컨텐츠" fill className="object-contain" />
+              </div>
+              <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
+                <Image src="/images/vng.png" alt="전정기능 분석 VNG 검사" fill className="object-contain" />
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 relative z-10">
