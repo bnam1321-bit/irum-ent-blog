@@ -50,8 +50,11 @@ async function generatePost() {
             ${JSON.stringify(existingTitles)}
     
             위 주제들과 겹치지 않는, 이비인후과 환자들에게 유용한 새로운 건강 정보 주제 1가지만 추천해주세요.
-            반드시 이비인후과 관련 질환(귀, 코, 목)에 대한 주제만 추천하세요.
-            예시: 비염, 축농증, 편도염, 중이염, 이명, 난청, 어지럼증, 코골이, 수면무호흡, 알레르기 비염, 인후염, 후두염, 성대결절, 외이도염, 비중격만곡증, 후비루, 코피 등
+            반드시 다음 우리 병원의 핵심 전문 분야와 관련된 주제만 추천하세요:
+            - 수면/코골이 클리닉 (수면장애, 코골이, 수면무호흡, 수술)
+            - 어지럼증 클리닉 (이석증, 메니에르병, 전정신경염, 어지럼증 검사)
+            - 난청/이명 클리닉 (돌발성 난청, 노인성 난청, 보청기 처방, 청력검사)
+            - 비염/축농증 수술 클리닉 (microshaver 수술, 국소마취 시스템)
             출력 형식: 주제만 텍스트로 출력 (예: "환절기 알레르기 비염의 증상과 관리법")
             명확하고 구체적인 주제를 선정하세요.
             `;
@@ -62,16 +65,15 @@ async function generatePost() {
         } catch (e) {
             console.error("❌ 주제 생성 실패, 기본 리스트 사용", e);
             const entTopics = [
-                '환절기 알레르기 비염의 증상과 관리법',
-                '축농증(부비동염)의 원인과 치료 방법',
-                '반복되는 편도염, 수술이 필요한 경우는?',
-                '귀에서 소리가 나요 - 이명의 원인과 대처',
-                '아이 중이염, 부모가 알아야 할 것들',
-                '코골이와 수면무호흡증의 위험성',
-                '갑자기 찾아온 어지럼증, 이석증일 수 있습니다',
-                '목이 쉬었어요 - 성대결절의 증상과 관리',
-                '비중격만곡증, 코막힘의 숨겨진 원인',
-                '후비루 증후군, 목에 가래가 계속 걸리는 이유'
+                '심한 코골이와 수면무호흡증, 방치하면 안 되는 이유',
+                '수면장애, 원인을 찾고 코골이 수술로 해결할 수 있을까?',
+                '갑자기 천장이 핑 돈다면? 어지럼증 검사와 이석증 치료',
+                '메니에르병과 전정신경염, 어지럼증의 다양한 원인과 대처',
+                '갑자기 귀가 안 들리는 돌발성 난청, 골든타임을 지키세요',
+                '노인성 난청과 정밀 청력검사, 그리고 맞춤형 보청기 처방',
+                '원인 모를 이명(귀울림), 어떻게 관리하고 치료해야 할까?',
+                '잘 낫지 않는 축농증과 비염, microshaver를 이용한 안전한 수술',
+                '국소마취 시스템으로 더 안전해진 이비인후과 코 수술'
             ];
             topic = entTopics[Math.floor(Math.random() * entTopics.length)];
             console.log(`📝 랜덤 선택 주제: [${topic}]`);
@@ -104,130 +106,7 @@ async function generatePost() {
 
                 const fullPrompt = `${SYSTEM_PROMPT}
 
-## 병원 기본 정보 (글 작성 시 참고용 - 포스팅에 직접 기재하지 말 것)
-- 병원명: 이룸이비인후과의원
-- 소재지: 경기 남양주시 진접읍 해밀예당1로 30 센타플라자 6층
-- 기관 유형: 이비인후과 전문의 진료 의원
-- 주요 진료: 비염, 축농증, 중이염, 편도염, 코골이/수면무호흡, 어지럼증, 이명/난청
-- 대표 번호: 031-571-5075
-
-## 입력된 주제
-- **주제**: "${topic}"
-- **타겟**: 해당 증상으로 고민하는 환자, 가족, 건강에 관심있는 일반인
-- **핵심 키워드**: ${KEYWORDS.join(', ')}
-
-const fs = require('fs');
-const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const { format } = require('date-fns');
-const { SYSTEM_PROMPT, KEYWORDS, CLINIC_INFO } = require('./prompts');
-require('dotenv').config({ path: path.join(__dirname, '../.env') });
-
-// Google Gemini 설정
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-
-async function generatePost() {
-    console.log('🤖 AI(Gemini) 의사선생님이 글을 쓸 준비를 하고 있습니다...');
-
-    if (!process.env.GOOGLE_API_KEY) {
-        console.error('❌ GOOGLE_API_KEY가 없습니다. .env 파일을 확인해주세요.');
-        process.exit(1);
-    }
-
-    // 1. 기존 글 확인 및 주제 선정
-    const postsDir = path.join(__dirname, '../content/posts');
-    const existingTitles = [];
-
-    if (fs.existsSync(postsDir)) {
-        const files = fs.readdirSync(postsDir);
-        files.forEach(file => {
-            if (file.endsWith('.md')) {
-                const content = fs.readFileSync(path.join(postsDir, file), 'utf-8');
-                const match = content.match(/title: "(.*)"/);
-                if (match) {
-                    existingTitles.push(match[1]);
-                }
-            }
-        });
-    }
-
-    console.log(`📚 기존 작성된 글: ${existingTitles.length}개`);
-
-    let topic = "";
-
-    // 명령줄 인수로 주제가 전달되면 해당 주제 사용
-    if (process.argv[2]) {
-        topic = process.argv[2];
-        console.log(`🎯 지정된 주제: [${topic}]`);
-    } else {
-        try {
-            const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
-            const topicPrompt = `
-            당신은 이비인후과 병원 블로그 마케터입니다.
-            기존에 작성된 블로그 글 제목들은 다음과 같습니다:
-            ${JSON.stringify(existingTitles)}
-    
-            위 주제들과 겹치지 않는, 이비인후과 환자들에게 유용한 새로운 건강 정보 주제 1가지만 추천해주세요.
-            반드시 이비인후과 관련 질환(귀, 코, 목)에 대한 주제만 추천하세요.
-            예시: 비염, 축농증, 편도염, 중이염, 이명, 난청, 어지럼증, 코골이, 수면무호흡, 알레르기 비염, 인후염, 후두염, 성대결절, 외이도염, 비중격만곡증, 후비루, 코피 등
-            출력 형식: 주제만 텍스트로 출력 (예: "환절기 알레르기 비염의 증상과 관리법")
-            명확하고 구체적인 주제를 선정하세요.
-            `;
-
-            const result = await model.generateContent(topicPrompt);
-            topic = result.response.text().trim().replace(/"/g, '');
-            console.log(`💡 AI 추천 주제: [${topic}]`);
-        } catch (e) {
-            console.error("❌ 주제 생성 실패, 기본 리스트 사용", e);
-            const entTopics = [
-                '환절기 알레르기 비염의 증상과 관리법',
-                '축농증(부비동염)의 원인과 치료 방법',
-                '반복되는 편도염, 수술이 필요한 경우는?',
-                '귀에서 소리가 나요 - 이명의 원인과 대처',
-                '아이 중이염, 부모가 알아야 할 것들',
-                '코골이와 수면무호흡증의 위험성',
-                '갑자기 찾아온 어지럼증, 이석증일 수 있습니다',
-                '목이 쉬었어요 - 성대결절의 증상과 관리',
-                '비중격만곡증, 코막힘의 숨겨진 원인',
-                '후비루 증후군, 목에 가래가 계속 걸리는 이유'
-            ];
-            topic = entTopics[Math.floor(Math.random() * entTopics.length)];
-            console.log(`📝 랜덤 선택 주제: [${topic}]`);
-        }
-    }
-
-    // KST 기준으로 날짜 설정 (UTC+9)
-    const kstDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000);
-    const today = format(kstDate, 'yyyy-MM-dd');
-
-    // 2. 글 작성
-    let content = "";
-
-    const MODELS = ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.0-flash"];
-    let lastError = null;
-
-    for (const modelName of MODELS) {
-        for (let attempt = 1; attempt <= 2; attempt++) {
-            try {
-                console.log(`🚀 ${modelName} 모델로 글 작성 시도 (${attempt}/2)...`);
-                const model = genAI.getGenerativeModel({
-                    model: modelName,
-                    generationConfig: {
-                        temperature: 0.7,
-                        topP: 0.8,
-                        topK: 40,
-                        maxOutputTokens: 8192,
-                    }
-                });
-
-                const fullPrompt = `${SYSTEM_PROMPT}
-
-## 병원 기본 정보 (글 작성 시 참고용 - 포스팅에 직접 기재하지 말 것)
-- 병원명: 이룸이비인후과의원
-- 소재지: 경기 남양주시 진접읍 해밀예당1로 30 센타플라자 6층
-- 기관 유형: 이비인후과 전문의 진료 의원
-- 주요 진료: 비염, 축농증, 중이염, 편도염, 코골이/수면무호흡, 어지럼증, 이명/난청
-- 대표 번호: 031-571-5075
+${CLINIC_INFO}
 
 ## 입력된 주제
 - **주제**: "${topic}"
