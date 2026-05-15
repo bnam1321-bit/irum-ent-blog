@@ -112,6 +112,77 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
+
+        {/* 어지럼증/이명 특화 장비 섹션 */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+            
+            <div className="text-center mb-10 relative z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4" style={{ background: '#FFF7ED', color: '#EA580C' }}>
+                🌀 어지럼증·이명 클리닉
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: '#4A3728' }}>
+                대학병원급 정밀 어지럼증 검사 장비
+              </h2>
+              <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
+                이석증, 메니에르병, 전정신경염 등 복잡한 어지럼증의 원인을<br className="hidden sm:block" /> 대학병원급 최첨단 장비를 통해 오차 없이 정밀하게 진단하고 치료합니다.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 relative z-10">
+              {/* SBT-390 */}
+              <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">⚖️</span>
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>발란싱 캣 동적체평형검사기</h3>
+                    <p className="text-xs font-semibold" style={{ color: '#EA580C' }}>SBT-390 (검사 및 재활 훈련기)</p>
+                  </div>
+                </div>
+                <ul className="space-y-3 mt-6">
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>초정밀 평형 평가:</strong> 동적체평형검사(6 Conditions) 및 자동평형검사 지원</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>실시간 Bio-feedback:</strong> 환자의 움직임, 무게중심 이동을 분석하여 즉각적인 훈련 연동</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>All-in-One 시스템:</strong> 맞춤 전정재활훈련(기초/심화)과 정밀 검사를 장비 한 대로 동시 진행</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* VNG */}
+              <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">👁️</span>
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>비디오 안진검사기 (VNG)</h3>
+                    <p className="text-xs font-semibold" style={{ color: '#EA580C' }}>전정기능 분석 필수 검사 장비</p>
+                  </div>
+                </div>
+                <ul className="space-y-3 mt-6">
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>원인 감별 진단:</strong> 어지럼증이 귀(전정계)의 문제인지 뇌 병변인지 정확하게 구분</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>정량적 안구 분석:</strong> 미세한 안구의 떨림(안진)을 비디오로 정밀하게 추적 및 분석</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>맞춤 치료 계획:</strong> 임상 현장에서 수집된 객관적 데이터를 바탕으로 최적의 치료 방향 설정</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
