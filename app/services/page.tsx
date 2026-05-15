@@ -1,130 +1,118 @@
-
+export const metadata = {
+  title: '진료정보 | 이룸이비인후과',
+  description: '이룸이비인후과의 전문 협진 시스템과 최첨단 수면평가 및 양압기 장비 정보를 안내합니다.',
+};
 
 export default function ServicesPage() {
-    return (
-        <div className="min-h-screen bg-slate-50 py-20 px-4">
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-16">
-                    <h1 className="text-5xl font-black text-slate-900 mb-6 drop-shadow-sm">진료 안내</h1>
-                    <p className="text-xl text-slate-600 font-medium">이룸이비인후과는 다음과 같은 진료를 제공합니다</p>
-                </div>
+  return (
+    <div className="min-h-screen" style={{ background: '#FAFAF8' }}>
+      {/* Page Header */}
+      <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 text-center bg-white border-b border-slate-100">
+        <h1 className="text-4xl font-black mb-4" style={{ color: '#4A3728' }}>진료안내</h1>
+        <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          이룸이비인후과만의 특별한 진료 시스템과 최첨단 장비를 소개합니다.
+        </p>
+      </div>
 
-                <div className="grid md:grid-cols-2 gap-8 mb-16">
-                    {/* 비염 / 알레르기 비염 */}
-                    <div className="bg-white rounded-3xl p-8 shadow-md hover-lift border border-slate-100">
-                        <div className="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-3xl mb-6 shadow-sm">
-                            👃
-                        </div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">비염 / 알레르기 비염</h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            코막힘, 콧물, 재채기 등 비염 증상의 정확한 진단과 치료
-                        </p>
-                    </div>
-
-                    {/* 축농증 (부비동염) */}
-                    <div className="bg-white rounded-3xl p-8 shadow-md hover-lift border border-slate-100">
-                        <div className="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-3xl mb-6 shadow-sm">
-                            🫁
-                        </div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">축농증 (부비동염)</h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            급성·만성 부비동염의 체계적인 진단과 치료
-                        </p>
-                    </div>
-
-                    {/* 중이염 / 난청 */}
-                    <div className="bg-white rounded-3xl p-8 shadow-md hover-lift border border-slate-100">
-                        <div className="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-3xl mb-6 shadow-sm">
-                            👂
-                        </div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">중이염 / 난청</h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            중이염, 이명, 난청 등 귀 질환 전문 진료
-                        </p>
-                    </div>
-
-                    {/* 편도염 / 인후염 */}
-                    <div className="bg-white rounded-3xl p-8 shadow-md hover-lift border border-slate-100">
-                        <div className="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-3xl mb-6 shadow-sm">
-                            🗣️
-                        </div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">편도염 / 인후염</h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            목 통증, 편도 부종, 인후 불편감 치료
-                        </p>
-                    </div>
-
-                    {/* 코골이 / 수면무호흡 */}
-                    <div className="bg-white rounded-3xl p-8 shadow-md hover-lift border border-slate-100">
-                        <div className="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-3xl mb-6 shadow-sm">
-                            😴
-                        </div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">코골이 / 수면무호흡</h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            코골이 및 수면무호흡증 검사와 치료
-                        </p>
-                    </div>
-
-                    {/* 어지럼증 */}
-                    <div className="bg-white rounded-3xl p-8 shadow-md hover-lift border border-slate-100">
-                        <div className="w-16 h-16 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-3xl mb-6 shadow-sm">
-                            💫
-                        </div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">어지럼증</h3>
-                        <p className="text-slate-600 leading-relaxed">
-                            이석증, 메니에르병 등 어지럼증 원인 진단과 치료
-                        </p>
-                    </div>
-                </div>
-
-                {/* 진료 시간 */}
-                <div className="bg-white rounded-3xl p-12 shadow-xl border border-slate-100">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center tracking-tight">진료 시간</h2>
-                    <div className="max-w-2xl mx-auto space-y-4">
-                        <div className="flex justify-between py-3 border-b border-slate-100 items-start">
-                            <span className="font-semibold text-slate-700 mt-1">월·목요일</span>
-                            <div className="text-right">
-                                <span className="block text-slate-600 font-medium">09:00 ~ 19:40</span>
-                                <span className="block text-sm text-slate-500 mt-0.5">접수마감 19:30</span>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-3 border-b border-slate-100 items-start">
-                            <span className="font-semibold text-slate-700 mt-1">화·수·금요일</span>
-                            <div className="text-right">
-                                <span className="block text-slate-600 font-medium">09:00 ~ 18:40</span>
-                                <span className="block text-sm text-slate-500 mt-0.5">접수마감 18:30</span>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-3 border-b border-slate-100">
-                            <span className="font-semibold text-slate-700">휴게시간 (월~금)</span>
-                            <span className="text-slate-600">13:00 ~ 14:00</span>
-                        </div>
-                        <div className="flex justify-between py-3 border-b border-slate-100 items-start">
-                            <span className="font-semibold text-teal-700 mt-1">토요일</span>
-                            <div className="text-right">
-                                <span className="block text-slate-600 font-medium">09:00 ~ 14:00</span>
-                                <span className="block text-sm text-slate-500 mt-0.5">점심시간 없음 | 접수마감 13:50</span>
-                            </div>
-                        </div>
-                        <div className="flex justify-between py-3">
-                            <span className="font-semibold text-red-500">일요일</span>
-                            <span className="text-red-500 font-bold">정기휴무</span>
-                        </div>
-                    </div>
-
-                    <div className="mt-8 text-center">
-                        <p className="text-slate-500 mb-6">
-                            ※진료 시간은 사정에 따라 변경될 수 있습니다. 내원 전 문의 바랍니다.
-                        </p>
-                        <a
-                            href="tel:031-571-5075"
-                            className="inline-flex items-center px-8 py-4 bg-teal-700 text-white rounded-full font-bold hover:bg-teal-800 transition-all hover:scale-105 shadow-md"
-                        >
-                            📞 전화 문의하기
-                        </a>
-                    </div>
-                </div>
+      <div className="py-12">
+        {/* 협진 소개 섹션 */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: '#4A3728' }}>
+                전문의 협진, 더 정확한 진료
+              </h2>
+              <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
+                이룸이비인후과는 이비인후과 전문의와 소아청소년과 전문의가
+                함께 협진하여 귀·코·목 질환은 물론 온 가족의 건강까지 폭넓게 진료합니다.
+              </p>
             </div>
+            <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              <div className="text-center p-6 rounded-2xl" style={{ background: '#FDF8F3' }}>
+                <div className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl" style={{ background: '#F5E6D3' }}>👂</div>
+                <h3 className="font-bold mb-2" style={{ color: '#4A3728' }}>이비인후과 전문의</h3>
+                <p className="text-sm" style={{ color: '#7A6E62' }}>비염, 축농증, 중이염, 코골이, 어지럼증 등 귀·코·목 전문 진료</p>
+              </div>
+              <div className="text-center p-6 rounded-2xl" style={{ background: '#F3FAF8' }}>
+                <div className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl" style={{ background: '#D5F0EC' }}>👶</div>
+                <h3 className="font-bold mb-2" style={{ color: '#4A3728' }}>소아청소년과 전문의</h3>
+                <p className="text-sm" style={{ color: '#7A6E62' }}>소아 중이염, 비염, 편도 비대 등 어린이 귀·코·목 질환 협진</p>
+              </div>
+            </div>
+          </div>
         </div>
-    );
+
+        {/* 수면/양압기 특화 장비 섹션 */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-teal-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+            
+            <div className="text-center mb-10 relative z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4" style={{ background: '#E8F6F6', color: '#2BAAAD' }}>
+                🔬 수면무호흡·코골이 클리닉
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: '#4A3728' }}>
+                수면다원검사 및 프리미엄 양압기 처방
+              </h2>
+              <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
+                정확한 수면 상태 평가를 위한 65채널 최고급 수면다원검사 장비와<br className="hidden sm:block" /> 독일 로벤스타인 프리미엄 양압기를 통해 최적의 수면 솔루션을 제공합니다.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 relative z-10">
+              {/* PRISMA SMART MAX */}
+              <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">🫁</span>
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>프리즈마 스마트 맥스</h3>
+                    <p className="text-xs font-semibold" style={{ color: '#2BAAAD' }}>독일 로벤스타인 양압지속유지기 (PRISMA SMART MAX)</p>
+                  </div>
+                </div>
+                <ul className="space-y-3 mt-6">
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>저소음 설계:</strong> 수면에 방해받지 않는 편안한 사용 환경</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>스마트 클라우드 연동:</strong> PRISMA CLOUD 원격 데이터 확인 및 설정 변경</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>안심 리퍼 서비스:</strong> 국내 유일 양압기 내부 세척/교체 서비스 제공</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Sonata Wireless */}
+              <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">📊</span>
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>소나타 수면평가장치</h3>
+                    <p className="text-xs font-semibold" style={{ color: '#2BAAAD' }}>Sonata (Wireless) 65 channels PSG</p>
+                  </div>
+                </div>
+                <ul className="space-y-3 mt-6">
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>65채널 초정밀 검사:</strong> 뇌파, 심전도, 근전도 등 수면 중 신체 변화를 완벽하게 분석</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>무선(Wi-Fi) 연결 시스템:</strong> 복잡한 케이블 없이 환자의 편안한 수면 보장</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>고해상도 샘플링:</strong> 누락 없는 정확한 데이터 오프라인/온라인 기록</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

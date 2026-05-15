@@ -22,6 +22,7 @@ export default function Header() {
 
                 {/* Navigation */}
                 <nav className="main-nav">
+                    <Link href="/services" className="nav-link">진료정보</Link>
                     <Link href="/blog" className="nav-link">건강정보</Link>
                     <a href="https://map.naver.com/p/search/이룸이비인후과" target="_blank" rel="noopener noreferrer" className="nav-link">오시는 길</a>
                 </nav>
