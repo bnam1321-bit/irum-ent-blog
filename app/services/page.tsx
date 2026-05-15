@@ -201,6 +201,104 @@ export default function ServicesPage() {
             </div>
           </div>
         </div>
+
+        {/* 자율신경 검사 장비 섹션 */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+          <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+
+            <div className="text-center mb-10 relative z-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4" style={{ background: '#F0FDF4', color: '#16A34A' }}>
+                💓 자율신경 검사 클리닉
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: '#4A3728' }}>
+                AFT-800 자율신경 기능 정밀 검사
+              </h2>
+              <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
+                자세변화에 따른 생체신호를 분석하여 자율신경계 기능을 정밀하게 평가하는 장비로,<br className="hidden sm:block" /> 만성피로, 당뇨, 심혁관 환자의 조기 실조증 탐지에 필수적인 검사입니다.
+              </p>
+            </div>
+
+            {/* 장비 스펙 2컀럼 */}
+            <div className="grid md:grid-cols-2 gap-8 mb-8 relative z-10">
+              {/* 심박변이와 혁압변화 측정 */}
+              <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="text-3xl">💗</span>
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>심박변이와 혁압변화 측정</h3>
+                    <p className="text-xs font-semibold" style={{ color: '#16A34A' }}>AFT-800 (Heart Rate & Blood Pressure)</p>
+                  </div>
+                </div>
+                <ul className="space-y-2.5">
+                  {[
+                    'Valsalva에 의한 심박수의 변화',
+                    '직립 후 심박수의 변화',
+                    '심ํ호흥후의 심박수의 변화',
+                    '직립 후 혁압 반응',
+                    'Handgrip 동안의 혁압 반응'
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                      <span className="font-bold mt-0.5" style={{ color: '#16A34A' }}>{i + 1}.</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* HRV 부하 측정 */}
+              <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="text-3xl">📊</span>
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>HRV 부하 측정</h3>
+                    <p className="text-xs font-semibold" style={{ color: '#16A34A' }}>Heart Rate Variability 분석</p>
+                  </div>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>PSD 분석:</strong> Power Spectral Density 분석을 통한 자세변화에 따른 교감/부교감 신경의 반응 측정</span>
+                  </li>
+                  <li className="flex items-start gap-3 text-sm text-slate-600">
+                    <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                    <span><strong style={{ color: '#4A3728' }}>안정시보다 정확:</strong> 안정상태 측정시보다 자율신경 이상 탐지 정확도 향상 (검사시간: 6분 ~ 10분)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 검사항목 및 활용 */}
+            <div className="relative z-10">
+              <h3 className="text-lg font-black mb-5" style={{ color: '#4A3728' }}>AFT-800 검사항목 및 활용 대상</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {[
+                  { num: '1', label: '기립성 저혁압', filled: true },
+                  { num: '2', label: '자율신경계 실조증', filled: false },
+                  { num: '3', label: '당뇨 신경병증', filled: true },
+                  { num: '4', label: '실신, POTS, 운동중 실신 경험자', filled: false },
+                  { num: '5', label: '내분비내과 · 신경과 · 심장내과', filled: true },
+                ].map((item) => (
+                  <div
+                    key={item.num}
+                    className={`relative p-4 rounded-2xl flex items-center gap-3 ${
+                      item.filled ? 'text-white' : 'border-2 border-slate-200 text-slate-600'
+                    }`}
+                    style={item.filled ? { background: '#1E3A6E' } : {}}
+                  >
+                    <span
+                      className="text-4xl font-black opacity-30 absolute right-3 bottom-1 leading-none"
+                      style={{ color: item.filled ? '#ffffff' : '#CBD5E1' }}
+                    >
+                      {item.num}
+                    </span>
+                    <span className="text-sm font-bold relative z-10">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
