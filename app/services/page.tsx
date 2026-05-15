@@ -112,6 +112,31 @@ export default function ServicesPage() {
                 </ul>
               </div>
             </div>
+
+            {/* 의료보험 및 수면무호흡 증상 안내 */}
+            <div className="mt-10 grid md:grid-cols-2 gap-6 relative z-10">
+              <div className="p-6 rounded-2xl border-2 border-teal-100 bg-teal-50">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-2xl">🏥</span>
+                  <h3 className="font-bold text-lg" style={{ color: '#0D7377' }}>코골이/수면무호흡 검사 — 의료보험 시행</h3>
+                </div>
+                <p className="text-sm font-semibold mb-3" style={{ color: '#2BAAAD' }}>"이제 부담없는 금액으로 검사 받으세요!"</p>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  코골이·수면무호흡은 반드시 치료해야 하는 질병입니다. 고혁력 수면다원검사(PSG) 포함 보험 적용으로 지금 원장님과 상담하세요.
+                </p>
+              </div>
+              <div className="p-6 rounded-2xl border border-slate-100 bg-[#FAFAF8]">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-2xl">⚠️</span>
+                  <h3 className="font-bold text-base" style={{ color: '#4A3728' }}>수면무호흡이 가져오는 증상</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['고혁력','심근경색','뇌졸중','만성피로','기억력감퇴','우울증','성기능장애','하지불안증후군','조기사망','아동 ADHD','성장장애','학습장애','두통'].map((s) => (
+                    <span key={s} className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600">{s}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -308,6 +333,43 @@ export default function ServicesPage() {
                     <span className="text-sm font-bold relative z-10">{item.label}</span>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* 자율신경 검사 필요 증상 */}
+            <div className="mt-8 grid md:grid-cols-2 gap-6 relative z-10">
+              <div className="p-6 rounded-2xl border border-slate-100 bg-[#F0FDF4]">
+                <h3 className="font-bold text-base mb-4" style={{ color: '#15803D' }}>확인이 필요한 증상 체크리스트</h3>
+                <ul className="space-y-2">
+                  {[
+                    '원인 없이 어지럽고 실신하는 경우',
+                    '기립성저혁압, 저혁당 경험자, 두통, 수면장애가 있는 경우',
+                    '당뇨, 고혁당, 손발이 저린 경우',
+                    '심혁관 질환의 가족력과 거주력이 있는 경우',
+                    '우울, 불안, 면역력저하, 신경성 장애로 고생하는 경우',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                      <span style={{ color: '#16A34A' }} className="font-bold mt-0.5">✔</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="p-6 rounded-2xl border border-slate-100 bg-[#FAFAF8]">
+                <h3 className="font-bold text-base mb-4" style={{ color: '#4A3728' }}>자율신경계 이상 시 나타나는 증상</h3>
+                <ul className="space-y-2">
+                  {[
+                    '만성피로, 소화장애, 손발저림, 과민성대장(설사) 증상',
+                    '가슴 두근거림, 어지럼증, 현기증, 실신, 창백, 시력장애, 두통',
+                    '안정시에도 맥박이 빠름 (100회/분 이상)',
+                    '밤에 혁압이 상승하고 새벽에 혁압이 하강하여 기립성 저혁압 발생 (아침/식후/운동 시)',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
+                      <span style={{ color: '#D4882B' }} className="font-bold mt-0.5">✔</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
