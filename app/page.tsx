@@ -106,6 +106,77 @@ export default function Home() {
         </div>
       </div>
 
+      {/* 수면/양압기 특화 장비 섹션 */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-teal-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+          
+          <div className="text-center mb-10 relative z-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold mb-4" style={{ background: '#E8F6F6', color: '#2BAAAD' }}>
+              🔬 수면무호흡·코골이 클리닉
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: '#4A3728' }}>
+              수면다원검사 및 프리미엄 양압기 처방
+            </h2>
+            <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
+              정확한 수면 상태 평가를 위한 65채널 최고급 수면다원검사 장비와<br className="hidden sm:block" /> 독일 로벤스타인 프리미엄 양압기를 통해 최적의 수면 솔루션을 제공합니다.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 relative z-10">
+            {/* PRISMA SMART MAX */}
+            <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🫁</span>
+                <div>
+                  <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>프리즈마 스마트 맥스</h3>
+                  <p className="text-xs font-semibold" style={{ color: '#2BAAAD' }}>독일 로벤스타인 양압지속유지기 (PRISMA SMART MAX)</p>
+                </div>
+              </div>
+              <ul className="space-y-3 mt-6">
+                <li className="flex items-start gap-3 text-sm text-slate-600">
+                  <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                  <span><strong style={{ color: '#4A3728' }}>저소음 설계:</strong> 수면에 방해받지 않는 편안한 사용 환경</span>
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600">
+                  <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                  <span><strong style={{ color: '#4A3728' }}>스마트 클라우드 연동:</strong> PRISMA CLOUD 원격 데이터 확인 및 설정 변경</span>
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600">
+                  <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                  <span><strong style={{ color: '#4A3728' }}>안심 리퍼 서비스:</strong> 국내 유일 양압기 내부 세척/교체 서비스 제공</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Sonata Wireless */}
+            <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">📊</span>
+                <div>
+                  <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>소나타 수면평가장치</h3>
+                  <p className="text-xs font-semibold" style={{ color: '#2BAAAD' }}>Sonata (Wireless) 65 channels PSG</p>
+                </div>
+              </div>
+              <ul className="space-y-3 mt-6">
+                <li className="flex items-start gap-3 text-sm text-slate-600">
+                  <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                  <span><strong style={{ color: '#4A3728' }}>65채널 초정밀 검사:</strong> 뇌파, 심전도, 근전도 등 수면 중 신체 변화를 완벽하게 분석</span>
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600">
+                  <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                  <span><strong style={{ color: '#4A3728' }}>무선(Wi-Fi) 연결 시스템:</strong> 복잡한 케이블 없이 환자의 편안한 수면 보장</span>
+                </li>
+                <li className="flex items-start gap-3 text-sm text-slate-600">
+                  <span className="font-bold mt-0.5" style={{ color: '#D4882B' }}>✓</span>
+                  <span><strong style={{ color: '#4A3728' }}>고해상도 샘플링:</strong> 누락 없는 정확한 데이터 오프라인/온라인 기록</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Blog Posts Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-16">
         {/* Section Title */}
