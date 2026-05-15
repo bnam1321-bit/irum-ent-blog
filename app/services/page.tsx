@@ -219,6 +219,19 @@ export default function ServicesPage() {
               </p>
             </div>
 
+            {/* AFT-800 장비 이미지 */}
+            <div className="flex justify-center mb-10 relative z-10">
+              <div className="relative w-full max-w-sm rounded-3xl overflow-hidden border border-slate-100 shadow-md bg-white p-4">
+                <Image
+                  src="/images/aft800_1.png"
+                  alt="AFT-800 자율신경 기능 검사기"
+                  width={480}
+                  height={560}
+                  className="w-full object-contain"
+                />
+              </div>
+            </div>
+
             {/* 장비 스펙 2컀럼 */}
             <div className="grid md:grid-cols-2 gap-8 mb-8 relative z-10">
               {/* 심박변이와 혁압변화 측정 */}
