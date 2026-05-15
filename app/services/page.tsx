@@ -135,16 +135,16 @@ export default function ServicesPage() {
             {/* 검사 장비 이미지 갤러리 */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 relative z-10">
               <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
-                <Image src="/images/sbt-390-1.png" alt="발란싱 캣 동적체평형검사기" fill className="object-contain" />
+                <Image src="/images/KakaoTalk_20260514_131140418_02.jpg" alt="발란싱 캣 SBT-390 동적체평형검사" fill className="object-contain" />
               </div>
               <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
-                <Image src="/images/sbt-390-2.png" alt="동적체평형검사 및 평가 차트" fill className="object-contain" />
+                <Image src="/images/KakaoTalk_20260514_131140418_03.jpg" alt="자동평형검사 훈련 컨텐츠" fill className="object-contain" />
               </div>
               <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
-                <Image src="/images/sbt-390-3.png" alt="자동평형검사 훈련 컨텐츠" fill className="object-contain" />
+                <Image src="/images/KakaoTalk_20260514_131140418_04.jpg" alt="전정기능 분석 VNG 검사" fill className="object-cover" />
               </div>
               <div className="aspect-video relative rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
-                <Image src="/images/vng.png" alt="전정기능 분석 VNG 검사" fill className="object-contain" />
+                <Image src="/images/KakaoTalk_20260514_131140418_07.jpg" alt="VNG 각종 검사화면" fill className="object-cover" />
               </div>
             </div>
 
