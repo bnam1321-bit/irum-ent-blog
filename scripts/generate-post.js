@@ -98,7 +98,10 @@ async function generatePost() {
                 { text: userPrompt }
             ]);
             
-            content = result.response.text();
+            let rawContent = result.response.text();
+            
+            // 본문에 포함된 VALIDATION 주석 블록 제거
+            content = rawContent.replace(/<\s*!--VALIDATION[\s\S]*?-->/g, '').trim();
             
             // 검증
             const validation = validateOutput(content);
