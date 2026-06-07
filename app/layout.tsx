@@ -10,7 +10,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MedicalClinic",
   "name": "이룸이비인후과",
-  "url": "https://irum-ent-blog.vercel.app",
+  "url": "https://erooment.co.kr",
   "telephone": "031-571-5075",
   "address": {
     "@type": "PostalAddress",
@@ -35,7 +35,7 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://irum-ent-blog.vercel.app'),
+  metadataBase: new URL('https://erooment.co.kr'),
   title: "이룸이비인후과 | 남양주 진접 이비인후과",
   description: "남양주 진접 이룸이비인후과, 귀·코·목 전문 진료, 비염, 축농증, 중이염, 코골이 치료 안내.",
   keywords: "남양주 이비인후과, 진접 이비인후과, 이룸이비인후과, 비염, 축농증, 중이염, 코골이, 편도염",

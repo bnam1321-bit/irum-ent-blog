@@ -82,7 +82,7 @@ export default async function BlogPostPage({ params }: Props) {
         author: {
             '@type': 'MedicalClinic',
             name: '이룸이비인후과',
-            url: 'https://irum-ent-blog.vercel.app'
+            url: 'https://erooment.co.kr'
         },
     };
 
