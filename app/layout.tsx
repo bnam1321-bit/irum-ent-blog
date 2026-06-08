@@ -39,6 +39,16 @@ export const metadata: Metadata = {
   title: "이룸이비인후과 | 남양주 진접 이비인후과",
   description: "남양주 진접 이룸이비인후과, 귀·코·목 전문 진료, 비염, 축농증, 중이염, 코골이 치료 안내.",
   keywords: "남양주 이비인후과, 진접 이비인후과, 이룸이비인후과, 비염, 축농증, 중이염, 코골이, 편도염",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({
