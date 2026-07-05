@@ -38,6 +38,7 @@ async function generatePost() {
     let topic = "";
     let cluster = "";
     let targetKeyword = "";
+    let slug = "";
 
     // 2. 주제 선정 (GEO 최적화)
     try {
@@ -54,7 +55,8 @@ async function generatePost() {
         - 코·부비동 수술 클리닉 (OSSEOUNO Shaver)
 
         출력 형식 (JSON):
-        {"topic": "...", "cluster": "...", "targetKeyword": "..."}
+        {"topic": "...", "cluster": "...", "targetKeyword": "...", "slug": "..."}
+        * slug는 해당 주제를 대표하는 3~5단어의 영문 대시 기호(-)로 연결된 소문자 문자열이어야 합니다. (예: "sleep-apnea-test-sonata")
         `;
 
         const result = await model.generateContent(topicPrompt);
@@ -63,15 +65,16 @@ async function generatePost() {
         topic = parsed.topic;
         cluster = parsed.cluster;
         targetKeyword = parsed.targetKeyword;
+        slug = parsed.slug;
         console.log(`💡 선정된 주제: [${topic}] (${cluster})`);
     } catch (e) {
         console.log("⚠️ 주제 생성 실패, 기본 리스트 사용");
         const fallback = [
-            { topic: "남양주 진접 수면다원검사(Sonata Wireless) 과정과 보험 적용 안내", cluster: "수면 클리닉", targetKeyword: "남양주 수면다원검사" },
-            { topic: "원인 모를 만성 피로, AFT-800 자율신경 기능 정밀 검사가 필요한 이유", cluster: "자율신경 클리닉", targetKeyword: "AFT-800 자율신경검사" }
+            { topic: "남양주 진접 수면다원검사(Sonata Wireless) 과정과 보험 적용 안내", cluster: "수면 클리닉", targetKeyword: "남양주 수면다원검사", slug: "namyangju-sleep-test-sonata" },
+            { topic: "원인 모를 만성 피로, AFT-800 자율신경 기능 정밀 검사가 필요한 이유", cluster: "자율신경 클리닉", targetKeyword: "AFT-800 자율신경검사", slug: "fatigue-aft800-autonomic-test" }
         ];
         const item = fallback[Math.floor(Math.random() * fallback.length)];
-        topic = item.topic; cluster = item.cluster; targetKeyword = item.targetKeyword;
+        topic = item.topic; cluster = item.cluster; targetKeyword = item.targetKeyword; slug = item.slug;
     }
 
     const today = format(new Date(), 'yyyy-MM-dd');
@@ -134,10 +137,11 @@ ${content}
 `;
 
     // Slug 생성
-    let slug = topic.toLowerCase().replace(/[^a-z0-9가-힣]/g, '-').replace(/-+/g, '-');
-    if (!slug || slug === '-') slug = Math.random().toString(36).substring(7);
+    let finalSlug = slug ? slug.toLowerCase().trim() : topic.toLowerCase().replace(/[^a-z0-9가-힣]/g, '-').replace(/-+/g, '-');
+    finalSlug = finalSlug.replace(/[^a-z0-9가-힣-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    if (!finalSlug || finalSlug === '-') finalSlug = Math.random().toString(36).substring(7);
     
-    const filename = `${today}-${slug}.md`;
+    const filename = `${today}-${finalSlug}.md`;
     fs.writeFileSync(path.join(postsDir, filename), finalContent);
     console.log(`✅ 저장 완료: content/posts/${filename}`);
 }
