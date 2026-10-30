@@ -2,17 +2,43 @@ import { getAllPosts } from '@/lib/blog';
 import Link from 'next/link';
 import Image from 'next/image';
 import TypographicCover from '@/app/components/TypographicCover';
+import { SITE_URL } from '@/lib/constants';
 
 export const metadata = {
-  title: '건강정보 | 이룸이비인후과',
-  description: '이룸이비인후과에서 전하는 귀·코·목 건강 정보입니다. 이비인후과 전문의와 소아청소년과 전문의 협진.',
+  title: '이룸이비인후과의원 | 남양주 진접 귀·코·목 및 소아청소년과 협진',
+  description: '남양주시 진접읍 이룸이비인후과의원. 이비인후과·소아청소년과 전문의 협진, 수면다원검사(Sonata Wireless 65채널)·양압기(Prisma Smart Max), 어지럼증(SBT-390·VNG), 자율신경(AFT-800), 비염·축농증 내시경 수술(OSSEOUNO Shaver) 클리닉.',
 };
 
 export default function Home() {
   const posts = getAllPosts();
 
+  const homeJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${SITE_URL}/#webpage`,
+    url: SITE_URL,
+    name: '이룸이비인후과의원 공식 홈페이지 및 건강정보 칼럼',
+    description: '남양주 진접 이룸이비인후과의원 진료 안내 및 전문의가 직접 작성한 귀·코·목 의학 칼럼 모음',
+    isPartOf: { '@id': `${SITE_URL}/#clinic` },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: posts.slice(0, 20).map((post, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        url: `${SITE_URL}/blog/${encodeURIComponent(post.slug)}`,
+        name: post.title,
+        description: post.description,
+      })),
+    },
+  };
+
   return (
     <div className="min-h-screen" style={{ background: '#FAFAF8' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
+
       {/* Hero Section with Clinic Interior */}
       <div className="relative overflow-hidden" style={{ minHeight: '620px' }}>
         {/* Background: Clinic Interior Photo */}
@@ -79,6 +105,18 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FAFAF8] to-transparent"></div>
       </div>
 
+      {/* AI / 검색엔진 시맨틱 요약 섹션 (시각적 디자인 유지) */}
+      <section aria-label="이룸이비인후과의원 핵심 진료 및 보유 장비 요약" className="sr-only">
+        <h2>이룸이비인후과의원 주요 클리닉 및 정밀 진단 장비 안내</h2>
+        <p>경기도 남양주시 진접읍 해밀예당1로 30 센타플라자 6층에 위치한 이룸이비인후과의원(대표전화 031-571-5075)은 이비인후과 전문의와 소아청소년과 전문의가 협진하는 의료기관입니다.</p>
+        <ul>
+          <li>수면 클리닉: 소노스크린 플러스(Sonata Wireless) 65채널 무선 수면다원검사(PSG, 건강보험 적용) 및 독일 로벤스타인 프리즈마 스마트 맥스(Prisma Smart Max) 양압기 처방</li>
+          <li>어지럼증·이명·난청 클리닉: 발란싱 캣(SBT-390) 동적체평형검사 및 바이오피드백 전정재활훈련기, 비디오 안진검사기(VNG), 청력검사 및 보청기 처방</li>
+          <li>자율신경 클리닉: AFT-800 자율신경 기능 정밀 검사기를 통한 기립성 저혈압, 미주신경성 실신, 만성피로, 자율신경 실조증 진단</li>
+          <li>비염·축농증 수술 클리닉: OSSEOUNO Shaver System(미세절삭기) 및 국소마취 시스템을 이용한 내시경 부비동염(축농증) 수술, 비용종(물혹) 제거, 하비갑개 절제술, 비중격 성형술</li>
+        </ul>
+      </section>
+
       {/* Blog Posts Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-16">
         {/* Section Title */}
@@ -100,7 +138,7 @@ export default function Home() {
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, index) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
+              <Link key={post.slug} href={`/blog/${encodeURIComponent(post.slug)}`} className="group">
                 <article
                   className="h-full bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/50 hover:scale-[1.02] hover:-translate-y-1"
                   style={{ animationDelay: `${index * 100}ms` }}
@@ -108,9 +146,9 @@ export default function Home() {
                   <div className="relative h-56 w-full">
                     <TypographicCover title={post.title} tags={post.tags} slug={post.slug} />
                     <div className="absolute bottom-4 right-4 z-10">
-                      <div className="px-3 py-1.5 bg-black/40 backdrop-blur-md text-white rounded-full text-xs font-semibold">
+                      <time dateTime={post.date} className="px-3 py-1.5 bg-black/40 backdrop-blur-md text-white rounded-full text-xs font-semibold">
                         {post.date}
-                      </div>
+                      </time>
                     </div>
                   </div>
                   <div className="p-6">

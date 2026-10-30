@@ -28,33 +28,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 
+    const encodedSlug = encodeURIComponent(post.slug);
+    const canonicalUrl = `${SITE_URL}/blog/${encodedSlug}`;
+
     return {
         title: `${post.title} | ${CLINIC_NAME}`,
         description: post.description,
         keywords: [
             ...post.tags,
             CLINIC_NAME,
+            '이룸이비인후과의원',
             '남양주이비인후과',
             '진접이비인후과',
             '남양주진접이비인후과',
             '비염치료',
             '축농증치료',
-            '중이염치료'
+            '중이염치료',
+            '수면다원검사',
+            '어지럼증검사',
         ],
         alternates: {
-            canonical: `${SITE_URL}/blog/${post.slug}`,
+            canonical: canonicalUrl,
         },
         openGraph: {
             title: post.title,
             description: post.description,
             type: 'article',
             publishedTime: post.date,
-            url: `${SITE_URL}/blog/${post.slug}`,
+            url: canonicalUrl,
             siteName: CLINIC_NAME,
             authors: [CLINIC_NAME],
             images: [
                 {
-                    url: post.coverImage || '/images/og-default.jpg',
+                    url: post.coverImage || '/images/stock/medical.jpg',
                     width: 1200,
                     height: 630,
                     alt: post.title,
@@ -72,23 +78,94 @@ export default async function BlogPostPage({ params }: Props) {
         notFound();
     }
 
-    // JSON-LD 구조화 데이터
+    const encodedSlug = encodeURIComponent(post.slug);
+    const postUrl = `${SITE_URL}/blog/${encodedSlug}`;
+
+    // JSON-LD 구조화 데이터 (BlogPosting + MedicalWebPage + BreadcrumbList + 자동 추출 FAQPage)
+    const graphItems: Record<string, unknown>[] = [
+        {
+            '@type': ['BlogPosting', 'MedicalWebPage'],
+            '@id': `${postUrl}#article`,
+            mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': postUrl,
+            },
+            headline: post.title,
+            description: post.description,
+            datePublished: post.date,
+            dateModified: post.date,
+            inLanguage: 'ko-KR',
+            keywords: (post.tags || []).join(', '),
+            author: {
+                '@type': 'MedicalClinic',
+                '@id': `${SITE_URL}/#clinic`,
+                name: '이룸이비인후과의원',
+                url: SITE_URL,
+                telephone: '031-571-5075',
+                address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: '경기도 남양주시 진접읍 해밀예당1로 30 센타플라자 6층',
+                    addressLocality: '남양주시',
+                    addressRegion: '경기도',
+                    addressCountry: 'KR',
+                },
+            },
+            publisher: {
+                '@type': 'MedicalClinic',
+                '@id': `${SITE_URL}/#clinic`,
+                name: '이룸이비인후과의원',
+                url: SITE_URL,
+            },
+        },
+        {
+            '@type': 'BreadcrumbList',
+            '@id': `${postUrl}#breadcrumb`,
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: '홈',
+                    item: SITE_URL,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: '건강정보',
+                    item: `${SITE_URL}/blog`,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: post.title,
+                    item: postUrl,
+                },
+            ],
+        },
+    ];
+
+    if (post.faqs && post.faqs.length > 0) {
+        graphItems.push({
+            '@type': 'FAQPage',
+            '@id': `${postUrl}#faq`,
+            mainEntity: post.faqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: faq.answer,
+                },
+            })),
+        });
+    }
+
     const jsonLd = {
         '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description: post.description,
-        datePublished: post.date,
-        author: {
-            '@type': 'MedicalClinic',
-            name: '이룸이비인후과',
-            url: 'https://erooment.co.kr'
-        },
+        '@graph': graphItems,
     };
 
     return (
         <div className="min-h-screen gradient-bg">
-            {/* 구조화 데이터 삽입 */}
+            {/* 구조화 데이터 삽입 (BlogPosting + MedicalWebPage + BreadcrumbList + FAQPage) */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -106,14 +183,14 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
             </div>
 
-            <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12" itemScope itemType="https://schema.org/MedicalWebPage">
                 {/* Article Header */}
                 <header className="mb-12">
                     <div className="flex items-center gap-3 mb-6">
                         <span className="px-4 py-2 text-white rounded-full text-sm font-bold shadow-md" style={{ background: '#2BAAAD' }}>
                             {post.tags?.[0] || '건강정보'}
                         </span>
-                        <time className="text-gray-500 text-sm flex items-center">
+                        <time dateTime={post.date} className="text-gray-500 text-sm flex items-center">
                             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -121,12 +198,12 @@ export default async function BlogPostPage({ params }: Props) {
                         </time>
                     </div>
 
-                    <h1 className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight mb-6">
+                    <h1 itemProp="headline" className="text-4xl sm:text-5xl font-black text-gray-900 leading-tight mb-6">
                         {post.title}
                     </h1>
 
-                    {post.description && (
-                        <p className="text-xl leading-relaxed border-l-4 pl-6 py-2" style={{ color: '#7A6E62', borderColor: '#2BAAAD' }}>
+                    {post.description && post.description !== post.title && (
+                        <p itemProp="description" className="text-xl leading-relaxed border-l-4 pl-6 py-2" style={{ color: '#7A6E62', borderColor: '#2BAAAD' }}>
                             {post.description}
                         </p>
                     )}
@@ -134,7 +211,9 @@ export default async function BlogPostPage({ params }: Props) {
 
                 {/* Article Content */}
                 <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 mb-12">
-                    <div className="prose prose-lg prose-teal max-w-none
+                    <div
+                        itemProp="mainContentOfPage"
+                        className="prose prose-lg prose-teal max-w-none
                         prose-headings:font-bold prose-headings:text-slate-900
                         prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-slate-200
                         prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
@@ -144,8 +223,19 @@ export default async function BlogPostPage({ params }: Props) {
                         prose-ul:my-6 prose-li:my-2
                         prose-code:bg-slate-50 prose-code:text-teal-800 prose-code:px-2 prose-code:py-1 prose-code:rounded
                         prose-blockquote:bg-teal-50 prose-blockquote:border-l-4 prose-blockquote:border-teal-500 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic prose-blockquote:text-slate-700 prose-blockquote:my-8
-                    ">
-                        <ReactMarkdown>{post.content}</ReactMarkdown>
+                    "
+                    >
+                        <ReactMarkdown
+                            components={{
+                                h1: ({ children }) => (
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-2 mb-6 pb-3 border-b border-slate-200">
+                                        {children}
+                                    </h2>
+                                ),
+                            }}
+                        >
+                            {post.content}
+                        </ReactMarkdown>
                     </div>
                 </div>
 
@@ -172,7 +262,7 @@ export default async function BlogPostPage({ params }: Props) {
                             👂
                         </div>
                         <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-1">이룸이비인후과</h3>
+                            <h3 className="text-xl font-bold text-gray-900 mb-1">이룸이비인후과의원</h3>
                             <p className="text-gray-600">전문의가 전하는 귀·코·목 건강정보</p>
                         </div>
                     </div>

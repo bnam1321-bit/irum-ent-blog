@@ -1,9 +1,10 @@
+import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/blog';
 import { SITE_URL } from '@/lib/constants';
-import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const posts = getAllPosts();
+    const latestPostDate = posts.length > 0 ? new Date(posts[0].date) : new Date();
 
     const blogPosts = posts.map((post) => ({
         url: `${SITE_URL}/blog/${encodeURIComponent(post.slug)}`,
@@ -12,14 +13,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
-    const staticPages = [
+    return [
         {
             url: SITE_URL,
-            lastModified: new Date(),
-            changeFrequency: 'daily' as const,
-            priority: 1.0,
+            lastModified: latestPostDate,
+            changeFrequency: 'daily',
+            priority: 1,
         },
+        {
+            url: `${SITE_URL}/services`,
+            lastModified: latestPostDate,
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
+            url: `${SITE_URL}/blog`,
+            lastModified: latestPostDate,
+            changeFrequency: 'daily',
+            priority: 0.9,
+        },
+        {
+            url: `${SITE_URL}/llms.txt`,
+            lastModified: latestPostDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${SITE_URL}/llms-full.txt`,
+            lastModified: latestPostDate,
+            changeFrequency: 'weekly',
+            priority: 0.7,
+        },
+        ...blogPosts,
     ];
-
-    return [...staticPages, ...blogPosts];
 }

@@ -123,12 +123,25 @@ async function generatePost() {
 
     if (!content) return;
 
-    // 4. 프론트매터 결합 및 저장
+    // 4. TL;DR 요약문 추출 (description 메타데이터 최적화)
+    const bulletMatches = content
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(line => /^[*-]\s+/.test(line))
+        .map(line => line.replace(/^[*-]\s+/, '').replace(/\*\*(.*?)\*\*/g, '$1').trim());
+
+    const rawSummary = bulletMatches.length > 0
+        ? bulletMatches.slice(0, 2).join(' ')
+        : topic;
+    const cleanDescription = rawSummary.replace(/"/g, "'").substring(0, 155);
+    const cleanClusterTag = cluster.replace(/\(.*?\)/g, '').replace(/[·\s]/g, '').trim();
+
+    // 5. 프론트매터 결합 및 저장
     const finalContent = `---
-title: "${topic}"
+title: "${topic.replace(/"/g, "'")}"
 date: "${today}"
-description: "${topic.substring(0, 150)}"
-tags: ["남양주이비인후과", "진접이비인후과", "이룸이비인후과", "${cluster.replace('·', '').replace(' ', '')}"]
+description: "${cleanDescription}"
+tags: ["남양주이비인후과", "진접이비인후과", "이룸이비인후과", "${cleanClusterTag}"]
 author: "이룸이비인후과"
 coverImage: "/images/stock/medical.jpg"
 ---

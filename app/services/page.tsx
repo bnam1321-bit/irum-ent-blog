@@ -1,13 +1,76 @@
 import Image from 'next/image';
+import { SITE_URL } from '@/lib/constants';
 
 export const metadata = {
-  title: '진료정보 | 이룸이비인후과',
-  description: '이룸이비인후과의 전문 협진 시스템과 최첨단 수면평가 및 양압기 장비 정보를 안내합니다.',
+  title: '진료정보 및 보유장비 안내 | 이룸이비인후과의원',
+  description: '남양주 진접 이룸이비인후과의원의 이비인후과·소아청소년과 전문의 협진 시스템, 수면다원검사(Sonata Wireless 65채널), 양압기(Prisma Smart Max), 어지럼증(SBT-390, VNG), 자율신경(AFT-800), 비염·축농증 수술(OSSEOUNO Shaver) 장비를 안내합니다.',
+  alternates: {
+    canonical: `${SITE_URL}/services`,
+  },
+};
+
+const servicesJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'MedicalWebPage',
+      '@id': `${SITE_URL}/services#webpage`,
+      url: `${SITE_URL}/services`,
+      name: '진료정보 및 정밀 검사 장비 안내 | 이룸이비인후과의원',
+      description: '이룸이비인후과의원의 전문의 협진 시스템 및 4대 특화 클리닉(수면, 어지럼증·이명, 자율신경, 비염·축농증 수술) 보유 장비 상세 안내',
+      about: {
+        '@id': `${SITE_URL}/#clinic`,
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${SITE_URL}/services#faq`,
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: '이룸이비인후과의원에서는 어떤 진료과목 협진이 이루어지나요?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: '이룸이비인후과의원은 이비인후과 전문의와 소아청소년과 전문의가 함께 진료하는 원스톱 협진 시스템을 운영하여 성인 및 소아의 귀·코·목 질환과 호흡기 질환을 폭넓게 진료합니다.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '수면다원검사(PSG)와 양압기 처방은 어떤 장비를 사용하며 건강보험이 적용되나요?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: '65채널 무선 수면평가장치인 소노스크린 플러스(Sonata Wireless 65 channels PSG)로 정밀 수면다원검사를 시행하며, 독일 로벤스타인사의 프리즈마 스마트 맥스(PRISMA SMART MAX) 양압기를 처방합니다. 코골이·수면무호흡증 진단을 위한 수면다원검사와 양압기 대여는 건강보험 급여 적용이 가능합니다.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '어지럼증 및 자율신경 기능 검사는 어떤 장비로 진행되나요?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: '어지럼증 클리닉에서는 비디오 안진검사기(VNG)와 발란싱 캣(SBT-390) 동적체평형검사 및 전정재활훈련기를 사용하며, 자율신경 클리닉에서는 AFT-800 자율신경 기능 정밀 검사기를 통해 기립성 저혈압, 실신, 만성피로 및 자율신경 실조증을 약 6~10분 내에 정밀하게 평가합니다.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: '비염·축농증 수술에는 어떤 장비가 사용되나요?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: '내시경 부비동 수술 전용 미세절삭기인 OSSEOUNO Shaver System을 사용하여 국소마취 하에 축농증 수술, 비용종(물혹) 절제술, 하비갑개 절제술, 비중격 성형술 등을 출혈과 통증을 줄여 정밀하게 시행합니다.',
+          },
+        },
+      ],
+    },
+  ],
 };
 
 export default function ServicesPage() {
   return (
     <div className="min-h-screen" style={{ background: '#FAFAF8' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      />
+
       {/* Page Header */}
       <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 text-center bg-white border-b border-slate-100">
         <h1 className="text-4xl font-black mb-4" style={{ color: '#4A3728' }}>진료안내</h1>
@@ -18,7 +81,7 @@ export default function ServicesPage() {
 
       <div className="py-12">
         {/* 협진 소개 섹션 */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section aria-label="전문의 협진 시스템 안내" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100">
             <div className="text-center mb-8">
               <h2 className="text-2xl sm:text-3xl font-black mb-4" style={{ color: '#4A3728' }}>
@@ -42,10 +105,10 @@ export default function ServicesPage() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* 수면/양압기 특화 장비 섹션 */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section aria-label="수면무호흡 및 코골이 클리닉" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-teal-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
             
@@ -130,17 +193,17 @@ export default function ServicesPage() {
                   <h3 className="font-bold text-base" style={{ color: '#4A3728' }}>수면무호흡이 가져오는 증상</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {['고혁력','심근경색','뇌졸중','만성피로','기억력감퇴','우울증','성기능장애','하지불안증후군','조기사망','아동 ADHD','성장장애','학습장애','두통'].map((s) => (
+                  {['고혈압','심근경색','뇌졸중','만성피로','기억력감퇴','우울증','성기능장애','하지불안증후군','조기사망','아동 ADHD','성장장애','학습장애','두통'].map((s) => (
                     <span key={s} className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white border border-slate-200 text-slate-600">{s}</span>
                   ))}
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* 어지럼증/이명 특화 장비 섹션 */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section aria-label="어지럼증 및 이명 클리닉" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
             
@@ -224,10 +287,10 @@ export default function ServicesPage() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* 자율신경 검사 장비 섹션 */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section aria-label="자율신경 검사 클리닉" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-green-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
 
@@ -239,7 +302,7 @@ export default function ServicesPage() {
                 AFT-800 자율신경 기능 정밀 검사
               </h2>
               <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
-                자세변화에 따른 생체신호를 분석하여 자율신경계 기능을 정밀하게 평가하는 장비로,<br className="hidden sm:block" /> 만성피로, 당뇨, 심혁관 환자의 조기 실조증 탐지에 필수적인 검사입니다.
+                자세변화에 따른 생체신호를 분석하여 자율신경계 기능을 정밀하게 평가하는 장비로,<br className="hidden sm:block" /> 만성피로, 당뇨, 심혈관 환자의 조기 실조증 탐지에 필수적인 검사입니다.
               </p>
             </div>
 
@@ -256,14 +319,14 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            {/* 장비 스펙 2컀럼 */}
+            {/* 장비 스펙 2컬럼 */}
             <div className="grid md:grid-cols-2 gap-8 mb-8 relative z-10">
-              {/* 심박변이와 혁압변화 측정 */}
+              {/* 심박변이와 혈압변화 측정 */}
               <div className="bg-[#FAFAF8] p-6 sm:p-8 rounded-2xl border border-slate-100">
                 <div className="flex items-center gap-3 mb-5">
                   <span className="text-3xl">💗</span>
                   <div>
-                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>심박변이와 혁압변화 측정</h3>
+                    <h3 className="font-bold text-lg" style={{ color: '#4A3728' }}>심박변이와 혈압변화 측정</h3>
                     <p className="text-xs font-semibold" style={{ color: '#16A34A' }}>AFT-800 (Heart Rate & Blood Pressure)</p>
                   </div>
                 </div>
@@ -271,9 +334,9 @@ export default function ServicesPage() {
                   {[
                     'Valsalva에 의한 심박수의 변화',
                     '직립 후 심박수의 변화',
-                    '심ํ호흥후의 심박수의 변화',
-                    '직립 후 혁압 반응',
-                    'Handgrip 동안의 혁압 반응'
+                    '심호흡 후의 심박수 변화',
+                    '직립 후 혈압 반응',
+                    'Handgrip 동안의 혈압 반응'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
                       <span className="font-bold mt-0.5" style={{ color: '#16A34A' }}>{i + 1}.</span>
@@ -310,7 +373,7 @@ export default function ServicesPage() {
               <h3 className="text-lg font-black mb-5" style={{ color: '#4A3728' }}>AFT-800 검사항목 및 활용 대상</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {[
-                  { num: '1', label: '기립성 저혁압', filled: true },
+                  { num: '1', label: '기립성 저혈압', filled: true },
                   { num: '2', label: '자율신경계 실조증', filled: false },
                   { num: '3', label: '당뇨 신경병증', filled: true },
                   { num: '4', label: '실신, POTS, 운동중 실신 경험자', filled: false },
@@ -342,9 +405,9 @@ export default function ServicesPage() {
                 <ul className="space-y-2">
                   {[
                     '원인 없이 어지럽고 실신하는 경우',
-                    '기립성저혁압, 저혁당 경험자, 두통, 수면장애가 있는 경우',
-                    '당뇨, 고혁당, 손발이 저린 경우',
-                    '심혁관 질환의 가족력과 거주력이 있는 경우',
+                    '기립성 저혈압, 저혈당 경험자, 두통, 수면장애가 있는 경우',
+                    '당뇨, 고혈당, 손발이 저린 경우',
+                    '심혈관 질환의 가족력과 과거력이 있는 경우',
                     '우울, 불안, 면역력저하, 신경성 장애로 고생하는 경우',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
@@ -361,7 +424,7 @@ export default function ServicesPage() {
                     '만성피로, 소화장애, 손발저림, 과민성대장(설사) 증상',
                     '가슴 두근거림, 어지럼증, 현기증, 실신, 창백, 시력장애, 두통',
                     '안정시에도 맥박이 빠름 (100회/분 이상)',
-                    '밤에 혁압이 상승하고 새벽에 혁압이 하강하여 기립성 저혁압 발생 (아침/식후/운동 시)',
+                    '밤에 혈압이 상승하고 새벽에 혈압이 하강하여 기립성 저혈압 발생 (아침/식후/운동 시)',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
                       <span style={{ color: '#D4882B' }} className="font-bold mt-0.5">✔</span>
@@ -372,10 +435,10 @@ export default function ServicesPage() {
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* 비염수술 장비 섹션 */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <section aria-label="비염 및 축농증 수술 클리닉" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <div className="bg-white rounded-3xl shadow-xl p-8 sm:p-12 border border-slate-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-sky-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
 
@@ -387,7 +450,7 @@ export default function ServicesPage() {
                 축농증 및 비염수술 최신 의료장비
               </h2>
               <p className="text-base leading-relaxed max-w-2xl mx-auto" style={{ color: '#7A6E62' }}>
-                OSSEOUNO Shaver System은 내시경 부비동 수술 전용 점진 수술기구로,<br className="hidden sm:block" /> 수술 중 통증과 출혈이 적고 수술시간이 단축됩니다.
+                OSSEOUNO Shaver System은 내시경 부비동 수술 전용 정밀 수술기구로,<br className="hidden sm:block" /> 수술 중 통증과 출혈이 적고 수술시간이 단축됩니다.
               </p>
             </div>
 
@@ -397,7 +460,7 @@ export default function ServicesPage() {
                 <div className="rounded-3xl overflow-hidden border border-slate-100 shadow-md bg-white p-4 h-full flex items-center justify-center">
                   <Image
                     src="/images/img_osseouno.jpg"
-                    alt="OSSEOUNO 셔이버 시스템 비염수술 장비"
+                    alt="OSSEOUNO 쉐이버 시스템 비염·축농증 수술 장비"
                     width={300}
                     height={400}
                     className="w-full object-contain max-h-80"
@@ -413,7 +476,7 @@ export default function ServicesPage() {
                     <h3 className="font-bold text-base" style={{ color: '#2563EB' }}>제품용도</h3>
                   </div>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    내시경 부비동 수술에 쓰이는 기구로서 작은 트날이 물룹을 잘게 잘라서 흡입하여 제거할 수 있는 수술기구입니다.
+                    내시경 부비동 수술에 쓰이는 기구로서 미세한 회전 칼날이 비용종(물혹)이나 비후된 점막을 정밀하게 절삭·흡입하여 제거하는 수술기구입니다.
                   </p>
                 </div>
 
@@ -423,7 +486,7 @@ export default function ServicesPage() {
                     <h3 className="font-bold text-base" style={{ color: '#2563EB' }}>적용수술</h3>
                   </div>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    축농증수술, 융종절제술, 유동절제술, 비개 절제술, 비중격성형술, 안화감압술, 안신경감압술 등
+                    축농증(부비동염) 수술, 비용종(물혹) 절제술, 아데노이드 절제술, 하비갑개 점막하 절제술, 비중격 성형술, 안와감압술, 시신경감압술 등
                   </p>
                 </div>
 
@@ -435,18 +498,18 @@ export default function ServicesPage() {
                   <ul className="space-y-2">
                     <li className="flex items-center gap-2 text-sm text-slate-600">
                       <span className="font-bold" style={{ color: '#D4882B' }}>1.</span>
-                      수술 시 통증과 출혈이 적음
+                      수술 시 정상 점막 손상과 통증·출혈이 적음
                     </li>
                     <li className="flex items-center gap-2 text-sm text-slate-600">
                       <span className="font-bold" style={{ color: '#D4882B' }}>2.</span>
-                      수술이 용이하고 수술시간이 단축됨
+                      정밀한 병변 제거가 용이하고 수술시간이 단축됨
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

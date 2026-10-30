@@ -52,6 +52,7 @@ export default function TypographicCover({
 
     return (
         <div
+            aria-hidden="true"
             className={`relative w-full h-full overflow-hidden ${className}`}
             style={{ background: `linear-gradient(135deg, ${gradient.from} 0%, ${gradient.via} 50%, ${gradient.to} 100%)` }}
         >
@@ -87,9 +88,9 @@ export default function TypographicCover({
 
                 {/* Center: Main Title */}
                 <div className="mt-auto mb-auto">
-                    <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight drop-shadow-md break-keep line-clamp-3">
+                    <div className="text-2xl sm:text-3xl font-black text-white leading-tight drop-shadow-md break-keep line-clamp-3">
                         {title}
-                    </h2>
+                    </div>
                 </div>
 
                 {/* Bottom: 3-color accent line matching logo */}
